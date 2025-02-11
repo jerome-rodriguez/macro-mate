@@ -60,6 +60,14 @@ Nice-to-haves:
 
 ### Mockups
 
+**Home Page**
+
+![](Home.png)
+
+**Food Log Page**
+
+![](food_log_page.png)
+
 ### Data
 
 ![](data.png)
