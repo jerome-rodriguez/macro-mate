@@ -24,7 +24,7 @@ Fitness & Health Enthusiasts needing to track their calories for a variety of re
 
 - As a user, I want to edit food log entries
 
-- As a user, I want to be able to delete old food logs
+- As a user, I want to delete old food logs
 
 - As a user, I want to delete single food entries
 
@@ -44,10 +44,10 @@ Fitness & Health Enthusiasts needing to track their calories for a variety of re
 
 Nice-to-haves:
 
-- Google Vision API (image classification)
+- Google Vision API (image classification) or
 - Spoonacular API (image classification)
 
-- OpenAI API (calorie data)
+- Google Gemini API (calorie data) or
 - Edamam API (calorie data)
 
 ### Sitemap
@@ -57,6 +57,8 @@ Nice-to-haves:
 - Create New Food Log Page
 
 - Food Log Page
+
+- Nice-to-have: Upload food photo page (for automated calorie logging)
 
 ### Mockups
 
@@ -71,6 +73,8 @@ Nice-to-haves:
 ### Data
 
 ![](data.png)
+
+(I'm not sure if this is the correct relationship, will have to look more into it)
 
 ### Endpoints
 
@@ -100,15 +104,17 @@ Nice-to-haves:
 
 ## Roadmap
 
-| Day      | Task                                              | Deliverable               | Details                                                                                                                                                                                                                                                                                                                   |
-| -------- | ------------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **1**    | **Project setup (React, Node.js, MySQL)**         | Working backend structure | Set up the project environment for React (frontend) and Node.js/Express (backend). Install necessary dependencies (React, Express, MySQL, Knex.js). Create basic folder structure and establish connection between Node.js and MySQL using Knex.js (or Sequelize). Set up a basic Express server.                         |
-| **2**    | **Create database & API routes (CRUD)**           | API for food logs         | Design database schema (food logs table with `id`, `food_name`, `calories`, `image_url`, `created_at`). Set up MySQL database and tables. Create CRUD API routes (POST, GET, PUT, DELETE) to handle food log operations.                                                                                                  |
-| **3**    | **Build React UI & connect frontend**             | Functional UI             | Build React components for adding new food logs, displaying food logs, and editing/deleting them. Implement state management using React `useState` (or Redux). Use Axios or Fetch to call the backend API and perform CRUD operations.                                                                                   |
-| **4**    | **Cloudinary for image uploads**                  | Image storage works       | Set up Cloudinary for image uploads. Install dependencies like `cloudinary` and `multer` for file handling. Implement image upload in the frontend (React). On the backend, upload the image to Cloudinary and store the image URL in the database.                                                                       |
-| **5**    | **Edamam API for calorie data**                   | Food name → Calories      | Register for Edamam API key. Create a function to send a food name to the Edamam API and get the calorie data. Parse the response and integrate calorie data into the food log creation process.                                                                                                                          |
-| **6**    | **AI image recognition (Google Vision/Roboflow)** | Image → Food name         | Set up Google Vision or Roboflow for food image recognition. Implement a function to send the uploaded image to the AI API and extract the food name. Integrate this feature with food log creation.                                                                                                                      |
-| **7-10** | **UI polish, Deployment, Final touches**          | Ready-to-share MVP        | **Day 7:** Polish UI, add validation, ensure accessibility. <br>**Day 8:** Test the app thoroughly, including image uploads and API integrations. <br>**Day 9:** Deploy the app using platforms like Heroku or Vercel. <br>**Day 10:** Final touches—ensure responsiveness, error handling, and a smooth user experience. |
+| Day      | Task                                            | Deliverable               | Details                                                                                                                                                                                                                                                                                                                   |
+| -------- | ----------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1**    | **Project setup (React, Node.js, MySQL)**       | Working backend structure | Set up the project environment for React (frontend) and Node.js/Express (backend). Install necessary dependencies (React, Express, MySQL, Knex.js). Create basic folder structure and establish connection between Node.js and MySQL using Knex.js (or Sequelize). Set up a basic Express server.                         |
+| **2**    | **Create database & API routes (CRUD)**         | API for food logs         | Design database schema (food logs table with `id`, `food_name`, `calories`, `image_url`, `created_at`). Set up MySQL database and tables. Create CRUD API routes (POST, GET, PUT, DELETE) to handle food log operations.                                                                                                  |
+| **3**    | **Build React UI & connect frontend**           | Functional UI             | Build React components for adding new food logs, displaying food logs, and editing/deleting them. Implement state management using React `useState`. Use Axios to call the backend API and perform CRUD operations.                                                                                                       |
+| **4**    | **Cloudinary for image uploads (Nice-to-have)** | Image storage works       | Set up Cloudinary for image uploads. Install dependencies like `cloudinary` and `multer` for file handling. Implement image upload in the frontend (React). On the backend, upload the image to Cloudinary and store the image URL in the database.                                                                       |
+| **5**    | **Edamam API for calorie data (Nice-to-have)**  | Food name → Calories      | Register for Edamam API key. Create a function to send a food name to the Edamam API and get the calorie data. Parse the response and integrate calorie data into the food log creation process.                                                                                                                          |
+| **6**    | **AI image recognition (Nice-to-have)**         | Image → Food name         | Set up Google Vision for food image recognition. Implement a function to send the uploaded image to the AI API and extract the food name. Integrate this feature with food log creation.                                                                                                                                  |
+| **7-10** | **UI polish, Deployment, Final touches**        | Ready-to-share MVP        | **Day 7:** Polish UI, add validation, ensure accessibility. <br>**Day 8:** Test the app thoroughly, including image uploads and API integrations. <br>**Day 9:** Deploy the app using platforms like Heroku or Vercel. <br>**Day 10:** Final touches—ensure responsiveness, error handling, and a smooth user experience. |
+
+\*\*Rough Draft
 
 ## Future Implementations
 
