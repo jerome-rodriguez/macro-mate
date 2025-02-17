@@ -62,13 +62,9 @@ Nice-to-haves:
 
 ### Mockups
 
-**Home Page**
+![](/public/mockups/mockup.png)
 
-![](/public/mockups/Home.png)
-
-**Food Log Page**
-
-![](/public/mockups/food_log_page.png)
+![](/public/mockups/mockup-2.png)
 
 ### Data
 
