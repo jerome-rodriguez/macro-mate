@@ -64,15 +64,15 @@ Nice-to-haves:
 
 **Home Page**
 
-![](Home.png)
+![](/public/mockups/Home.png)
 
 **Food Log Page**
 
-![](food_log_page.png)
+![](/public/mockups/food_log_page.png)
 
 ### Data
 
-![](data.png)
+![](/public/mockups/data.png)
 
 (I'm not sure if this is the correct relationship, will have to look more into it)
 
