@@ -7,6 +7,7 @@ import GoalWidget from "../../components/GoalWidget/GoalWidget";
 import TodaysWidget from "../../components/TodaysWidget/TodaysWidget";
 import UserWidget from "../../components/UserWidget/UserWidget";
 import ViewLogsWidget from "../../components/ViewLogsWidget/ViewLogsWidget";
+import ImageRecogWidget from "../../components/ImageRecogWidget/ImageRecogWidget";
 
 function HomePage() {
   return (
@@ -25,6 +26,7 @@ function HomePage() {
       <Link to="/goals">
         <GoalWidget />
       </Link>
+      <ImageRecogWidget />
     </>
   );
 }
