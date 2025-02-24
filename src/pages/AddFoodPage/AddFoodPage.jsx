@@ -14,7 +14,6 @@ function AddFoodPage() {
       const response = await axios.get(`${API_URL}/api/search/search`, {
         params: { query: food },
       });
-
       setResults(response.data);
     } catch (e) {
       console.error(`Could not search food. Please try a different food.`);
@@ -35,7 +34,6 @@ function AddFoodPage() {
         mealType,
         date,
       });
-
       alert(`Added ${foodItem.name} to ${mealType}!`);
     } catch (error) {
       console.error(`Failed to log food:`, error);
@@ -58,17 +56,15 @@ function AddFoodPage() {
   // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
-    });
+    }));
   };
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Clear previous message
     setMessage("");
 
     try {
@@ -77,11 +73,8 @@ function AddFoodPage() {
           "Content-Type": "application/json",
         },
       });
-
-      // Success message
       setMessage(`Food item added successfully: ${response.data.foodName}`);
     } catch (error) {
-      // Error handling
       if (error.response) {
         setMessage(`Error: ${error.response.data.error}`);
       } else {
@@ -91,65 +84,103 @@ function AddFoodPage() {
   };
 
   return (
-    <>
-      <div>
-        <input
-          className="searchbar"
-          type="text"
-          id="searchbar"
-          placeholder="Search for a food"
-          value={food}
-          onChange={(e) => setFood(e.target.value)}
-        />
-        <button onClick={searchFood}>Search</button>
-      </div>
-      <div>
-        <label>Select Meal Type:</label>
-        <select value={mealType} onChange={(e) => setMealType(e.target.value)}>
-          <option value="breakfast">Breakfast</option>
-          <option value="lunch">Lunch</option>
-          <option value="dinner">Dinner</option>
-        </select>
-      </div>
-      <ul>
-        {results.map((item, index) => (
-          <li key={index}>
-            {item.name} - Calories: {Math.round(item.calories)} kcal, Protein:{" "}
-            {Math.round(item.protein)} g, Fat: {Math.round(item.fat)} g
-            <button onClick={() => handleSelect(item)}>
-              Add to {mealType}
-            </button>
-          </li>
-        ))}
-      </ul>
-      <div>
-        <h2>Add Food Item</h2>
+    <div className="add-food-page">
+      <section className="add-food-page__search">
+        <h2 className="add-food-page__form-header">Search Food Item</h2>
+        <div className="add-food-page__search-container">
+          <input
+            className="add-food-page__input"
+            type="text"
+            placeholder="Search for a food"
+            value={food}
+            onChange={(e) => setFood(e.target.value)}
+          />
+          <button className="add-food-page__button" onClick={searchFood}>
+            Search
+          </button>
+        </div>
+        <div className="add-food-page__form-group">
+          <label className="add-food-page__form-label">Select Meal Type</label>
+          <select
+            className="add-food-page__select"
+            value={mealType}
+            onChange={(e) => setMealType(e.target.value)}
+          >
+            <option className="add-food-page__option" value="breakfast">
+              Breakfast
+            </option>
+            <option className="add-food-page__option" value="lunch">
+              Lunch
+            </option>
+            <option className="add-food-page__option" value="dinner">
+              Dinner
+            </option>
+          </select>
+        </div>
+      </section>
+
+      {results.length > 0 && (
+        <ul className="add-food-page__results">
+          {results.map((item, index) => (
+            <li className="add-food-page__results-item" key={index}>
+              <div>
+                <strong>{item.name}</strong>
+                <p>
+                  Calories: {Math.round(item.calories)} kcal | Protein:{" "}
+                  {Math.round(item.protein)}g | Fat: {Math.round(item.fat)}g
+                </p>
+              </div>
+              <button
+                className="add-food-page__button"
+                onClick={() => handleSelect(item)}
+              >
+                Add to {mealType}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <section className="add-food-page__form">
+        <h2 className="add-food-page__form-header">Add Custom Food Item</h2>
         <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
+          <div className="add-food-page__form-grid">
+            <div className="add-food-page__form-group">
+              <label className="add-food-page__form-label" htmlFor="name">
+                Name
+              </label>
+              <input
+                className="add-food-page__input"
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="add-food-page__form-group">
+              <label className="add-food-page__form-label" htmlFor="calories">
+                Calories
+              </label>
+              <input
+                className="add-food-page__input"
+                type="number"
+                id="calories"
+                name="calories"
+                value={formData.calories}
+                onChange={handleChange}
+                required
+              />
+            </div>
           </div>
-          <div>
-            <label htmlFor="calories">Calories</label>
+          <div className="add-food-page__form-group">
+            <label className="add-food-page__form-label" htmlFor="protein">
+              Protein
+            </label>
             <input
-              type="number"
-              id="calories"
-              name="calories"
-              value={formData.calories}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="protein">Protein</label>
-            <input
+              className="add-food-page__input"
               type="number"
               id="protein"
               name="protein"
@@ -158,9 +189,13 @@ function AddFoodPage() {
               required
             />
           </div>
-          <div>
-            <label htmlFor="carbs">Carbs</label>
+
+          <div className="add-food-page__form-group">
+            <label className="add-food-page__form-label" htmlFor="carbs">
+              Carbs
+            </label>
             <input
+              className="add-food-page__input"
               type="number"
               id="carbs"
               name="carbs"
@@ -169,9 +204,12 @@ function AddFoodPage() {
               required
             />
           </div>
-          <div>
-            <label htmlFor="fat">Fat</label>
+          <div className="add-food-page__form-group">
+            <label className="add-food-page__form-label" htmlFor="fat">
+              Fat
+            </label>
             <input
+              className="add-food-page__input"
               type="number"
               id="fat"
               name="fat"
@@ -180,9 +218,12 @@ function AddFoodPage() {
               required
             />
           </div>
-          <div>
-            <label htmlFor="amount">Amount</label>
+          <div className="add-food-page__form-group">
+            <label className="add-food-page__form-label" htmlFor="amount">
+              Amount
+            </label>
             <input
+              className="add-food-page__input"
               type="number"
               id="amount"
               name="amount"
@@ -191,28 +232,53 @@ function AddFoodPage() {
               required
             />
           </div>
-          <div>
-            <label htmlFor="mealType">Meal Type</label>
+
+          <div className="add-food-page__form-group">
+            <label className="add-food-page__form-label">
+              Select Meal Type
+            </label>
             <select
+              className="add-food-page__select"
               id="mealType"
               name="mealType"
-              value={formData.mealType || mealType} // Default mealType to mealType state
+              value={formData.mealType || mealType}
               onChange={handleChange}
               required
             >
-              <option value="">Select Meal Type</option>
-              <option value="breakfast">Breakfast</option>
-              <option value="lunch">Lunch</option>
-              <option value="dinner">Dinner</option>
+              <option className="add-food-page__option" value="breakfast">
+                Breakfast
+              </option>
+              <option className="add-food-page__option" value="lunch">
+                Lunch
+              </option>
+              <option className="add-food-page__option" value="dinner">
+                Dinner
+              </option>
             </select>
           </div>
 
-          <button type="submit">Add Food Item</button>
+          <button
+            className="add-food-page__button"
+            type="submit"
+            style={{ marginTop: "2rem" }}
+          >
+            Add Food Item
+          </button>
         </form>
 
-        {message && <p>{message}</p>}
-      </div>
-    </>
+        {message && (
+          <div
+            className={`add-food-page__message ${
+              message.includes("Error")
+                ? "add-food-page__message--error"
+                : "add-food-page__message--success"
+            }`}
+          >
+            {message}
+          </div>
+        )}
+      </section>
+    </div>
   );
 }
 

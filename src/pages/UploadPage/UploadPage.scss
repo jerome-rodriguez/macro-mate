@@ -1,0 +1,118 @@
+@use "../../styles/partials/mixins.scss" as *;
+@use "../../styles/partials/variables.scss" as *;
+
+.upload-page {
+  padding: $spacing-xl;
+  max-width: 800px;
+  margin: 0 auto;
+
+  &__header {
+    color: $white;
+    margin-bottom: $spacing-xl;
+    text-align: center;
+  }
+
+  &__container {
+    @include glass-effect;
+    background-color: $light-navy;
+    padding: $spacing-xl;
+    border-radius: $border-radius-lg;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  &__upload-zone {
+    border: 2px dashed $navy-border;
+    border-radius: $border-radius-lg;
+    padding: $spacing-xl;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: $white;
+      background-color: rgba($white, 0.1);
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    span {
+      color: $white;
+      font-weight: 600;
+    }
+  }
+
+  &__preview {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: $border-radius-md;
+    margin: $spacing-lg;
+  }
+
+  &__select {
+    background-color: $dark-navy;
+    color: $white;
+    border: 1px solid $navy-border;
+    padding: $spacing-md;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+
+    &:focus {
+      border-color: $white;
+      outline: none;
+    }
+  }
+
+  &__button {
+    background-color: $white;
+    color: $dark-navy;
+    padding: $spacing-md $spacing-lg;
+    border: none;
+    border-radius: $border-radius-md;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover:not(:disabled) {
+      background-color: $white;
+      transform: translateY(-1px);
+    }
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+
+  &__result {
+    background-color: $widget-hover;
+    padding: $spacing-lg;
+    border-radius: $border-radius-md;
+    margin-top: $spacing-lg;
+  }
+
+  &__analysis {
+    color: $white;
+    margin-bottom: $spacing-md;
+  }
+
+  &__p {
+    margin-bottom: $spacing-sm;
+  }
+
+  &__strong {
+    color: $white;
+  }
+
+  &__error {
+    color: #ff6464;
+    background-color: rgba(255, 100, 100, 0.1);
+    padding: $spacing-md;
+    border-radius: $border-radius-md;
+    text-align: center;
+  }
+}

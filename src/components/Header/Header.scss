@@ -1,32 +1,32 @@
-// Import variables from your main SCSS file
-@use "sass:color";
-
-$background-gray: #f5f5f5; // Light gray background
-$navy: #1a2b3c;
-$dark-gray: #2c3e50;
-$light-gray: #34495e;
-$text-light: #ecf0f1;
-$spacing: 2rem;
-$border-radius: 12px;
+@use "../../styles/partials/variables.scss" as *;
+@use "../../styles/partials/mixins.scss" as *;
 
 .header {
-  background-color: $navy;
-  color: $text-light;
-  padding: $spacing * 0.75 $spacing;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-radius: $border-radius;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: $light-navy;
+  border-bottom: 1px solid $navy-border;
+  padding: $spacing-md $spacing-lg;
   position: sticky;
   top: 0;
   z-index: 100;
-  width: 100%;
+  @include glass-effect;
 
-  h4 {
-    margin: 0;
-    font-size: 1.75rem;
-    font-weight: 600;
-    letter-spacing: 1px;
+  &__img {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-start;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-start;
+    box-sizing: border-box;
   }
 }

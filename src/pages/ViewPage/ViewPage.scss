@@ -1,0 +1,89 @@
+@use "../../styles/partials/variables.scss" as *;
+@use "../../styles/partials/mixins.scss" as *;
+
+.view-page {
+  padding: $spacing-xl;
+
+  &__header {
+    color: $white;
+    margin-bottom: $spacing-xl;
+    font-size: 2rem;
+  }
+
+  &__date-group {
+    @include glass-effect;
+    background-color: $light-navy;
+    border-radius: $border-radius-lg;
+    padding: $spacing-lg;
+    margin-bottom: $spacing-lg;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  &__date-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: $spacing-md;
+    margin-bottom: $spacing-lg;
+    border-bottom: 1px solid $navy-border;
+  }
+
+  &__date-header-date {
+    color: $white;
+    font-size: 1.25rem;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+  }
+
+  &__button {
+    background-color: $widget-hover;
+    color: $white;
+    border: 1px solid $navy-border;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $white;
+      color: $dark-navy;
+    }
+
+    &--delete {
+      background-color: rgba(255, 100, 100, 0.1);
+      color: #ff6464;
+
+      &:hover {
+        background-color: #ff6464;
+        color: $white;
+      }
+    }
+  }
+
+  &__meal-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  &__meal-list-item {
+    padding: $spacing-md;
+    border-radius: $border-radius-sm;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: $widget-hover;
+    }
+  }
+
+  &__strong {
+    color: $white;
+    text-transform: capitalize;
+  }
+}

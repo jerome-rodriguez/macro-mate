@@ -1,0 +1,31 @@
+@use "./fonts" as *;
+@use "./mixins" as *;
+@use "./variables" as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// body {
+//   background-color: $dark-navy;
+//   color: $white;
+//   line-height: 1.5;
+//   height: 100vh;
+// }
+
+// .container {
+//   max-width: 1200px;
+//   margin: 0 auto;
+//   padding: 0 map-get($spacing, "lg");
+// }
+
+// .widget-grid {
+//   display: grid;
+//   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+//   gap: map-get($spacing, "xl");
+//   padding: map-get($spacing, "xl") 0;
+// }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./EditFoodPage.scss";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -112,25 +113,31 @@ export default function EditFoodPage() {
   };
 
   if (!mealLog || !mealLog.meal_type) {
-    return <p>Loading meal log details...</p>;
+    return <p className="editFoodPage__loading">Loading meal log details...</p>;
   }
 
   return (
     <section className="editFoodPage">
-      <h1>Edit Meal Log</h1>
-      <form onSubmit={handleSubmitEditFood}>
-        <label>
+      <h1 className="editFoodPage__title">Edit Meal Log</h1>
+      <form className="editFoodPage__form" onSubmit={handleSubmitEditFood}>
+        <label className="editFoodPage__label">
           Meal Type
-          <input
-            type="text"
+          <select
+            className="editFoodPage__select"
             name="meal_type"
             value={mealLog.meal_type}
             onChange={handleInputChange}
-          />
+          >
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner">Dinner</option>
+          </select>
         </label>
-        <label>
+
+        <label className="editFoodPage__label">
           Amount
           <input
+            className="editFoodPage__input"
             type="text"
             name="amount"
             value={mealLog.amount}
@@ -138,9 +145,11 @@ export default function EditFoodPage() {
             disabled={disableAmount}
           />
         </label>
-        <label>
+
+        <label className="editFoodPage__label">
           Calories
           <input
+            className="editFoodPage__input"
             type="text"
             name="calories"
             value={mealLog.calories}
@@ -148,9 +157,11 @@ export default function EditFoodPage() {
             disabled={disableMacros}
           />
         </label>
-        <label>
+
+        <label className="editFoodPage__label">
           Protein
           <input
+            className="editFoodPage__input"
             type="text"
             name="protein"
             value={mealLog.protein}
@@ -158,9 +169,11 @@ export default function EditFoodPage() {
             disabled={disableMacros}
           />
         </label>
-        <label>
+
+        <label className="editFoodPage__label">
           Carbs
           <input
+            className="editFoodPage__input"
             type="text"
             name="carbs"
             value={mealLog.carbs}
@@ -168,9 +181,11 @@ export default function EditFoodPage() {
             disabled={disableMacros}
           />
         </label>
-        <label>
+
+        <label className="editFoodPage__label">
           Fat
           <input
+            className="editFoodPage__input"
             type="text"
             name="fat"
             value={mealLog.fat}
@@ -178,10 +193,19 @@ export default function EditFoodPage() {
             disabled={disableMacros}
           />
         </label>
-        <button type="submit">Save</button>
-        <button type="button" onClick={() => navigate(-1)}>
-          Cancel
-        </button>
+
+        <div className="editFoodPage__button-container">
+          <button className="editFoodPage__button" type="submit">
+            Save
+          </button>
+          <button
+            className="editFoodPage__button editFoodPage__button--secondary"
+            type="button"
+            onClick={() => navigate(-1)}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </section>
   );

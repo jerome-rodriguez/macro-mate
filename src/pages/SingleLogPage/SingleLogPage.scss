@@ -1,0 +1,98 @@
+@use "../../styles/partials/variables.scss" as *;
+@use "../../styles/partials/mixins.scss" as *;
+
+.single-log {
+  padding: $spacing-xl;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  &__header {
+    color: $white;
+    margin-bottom: $spacing-xl;
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  &__list {
+    @include glass-effect;
+    background-color: $light-navy;
+    border-radius: $border-radius-lg;
+    padding: $spacing-lg;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-lg;
+    border-bottom: 1px solid $navy-border;
+    transition: all 0.3s ease;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: $widget-hover;
+      transform: translateX(4px);
+    }
+  }
+
+  &__content {
+    flex-grow: 1;
+
+    &-type {
+      color: $white;
+      font-weight: 700;
+      text-transform: capitalize;
+      margin-bottom: $spacing-xs;
+    }
+
+    &-details {
+      color: $blue-gray;
+      font-size: 0.95rem;
+
+      strong {
+        color: $white;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    align-items: center;
+  }
+
+  &__button {
+    padding: $spacing-sm $spacing-md;
+    border-radius: $border-radius-md;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &--edit {
+      background-color: $widget-hover;
+      color: $white;
+      border: 1px solid $navy-border;
+
+      &:hover {
+        background-color: $white;
+        color: $dark-navy;
+        border-color: $white;
+      }
+    }
+
+    &--delete {
+      background-color: rgba(255, 100, 100, 0.1);
+      color: #ff6464;
+      border: 1px solid rgba(255, 100, 100, 0.2);
+
+      &:hover {
+        background-color: #ff6464;
+        color: $white;
+      }
+    }
+  }
+}

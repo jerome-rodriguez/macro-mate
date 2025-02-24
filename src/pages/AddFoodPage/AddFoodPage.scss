@@ -1,0 +1,170 @@
+@use "../../styles/partials/variables.scss" as *;
+@use "../../styles/partials/mixins.scss" as *;
+
+.add-food-page {
+  padding: $spacing-xl;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  // Search section
+  &__search {
+    @include glass-effect;
+    background-color: $light-navy;
+    padding: $spacing-lg;
+    border-radius: $border-radius-lg;
+    margin-bottom: $spacing-xl;
+
+    &-container {
+      display: flex;
+      gap: $spacing-md;
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  // Input styling for both text inputs and selects
+  &__input {
+    background-color: $dark-navy;
+    border: 1px solid $navy-border;
+    color: $white;
+    padding: $spacing-md;
+    border-radius: $border-radius-md;
+    width: 100%;
+    transition: all 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $white;
+      box-shadow: 0 0 0 2px rgba($white, 0.2);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  // Specific styling for select elements (extending the input style)
+  &__select {
+    @extend .add-food-page__input;
+    cursor: pointer;
+  }
+
+  // Option styling for select options
+  &__option {
+    background-color: $dark-navy;
+    color: $white;
+  }
+
+  // Button styling
+  &__button {
+    background-color: $white;
+    color: $dark-navy;
+    padding: $spacing-md $spacing-lg;
+    border: none;
+    border-radius: $border-radius-md;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $white;
+      transform: translateY(-1px);
+    }
+  }
+
+  // Results list
+  &__results {
+    @include glass-effect;
+    background-color: $light-navy;
+    border-radius: $border-radius-lg;
+    padding: $spacing-lg;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__results-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-md;
+    border-bottom: 1px solid $navy-border;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: $widget-hover;
+    }
+  }
+
+  // Manual entry form
+  &__form {
+    @include glass-effect;
+    background-color: $light-navy;
+    padding: $spacing-xl;
+    border-radius: $border-radius-lg;
+  }
+
+  &__form-header {
+    color: $white;
+    margin-bottom: $spacing-lg;
+  }
+
+  // Message styling with modifiers
+  &__message {
+    margin-top: $spacing-lg;
+    padding: $spacing-md;
+    border-radius: $border-radius-md;
+
+    &--success {
+      background-color: rgba(100, 255, 218, 0.1);
+      color: $white;
+    }
+
+    &--error {
+      background-color: rgba(255, 100, 100, 0.1);
+      color: #ff6464;
+    }
+  }
+}
+
+// Instead of using global classes, we now namespace these grid and form-group elements
+.add-food-page__form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-lg;
+}
+
+.add-food-page__form-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.add-food-page__form-label {
+  color: $blue-gray;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .add-food-page {
+    padding: $spacing-lg;
+  }
+
+  .add-food-page__search,
+  .add-food-page__form {
+    padding: $spacing-lg;
+  }
+
+  .add-food-page__form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .add-food-page__button-container {
+    flex-direction: column;
+
+    .add-food-page__button {
+      width: 100%;
+    }
+  }
+}

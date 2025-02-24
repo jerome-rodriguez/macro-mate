@@ -1,16 +1,54 @@
+@use "../../styles/partials/mixins.scss" as *;
+@use "../../styles/partials/variables.scss" as *;
+
 .add-food {
-  width: 18rem; // 288px
-  height: 18rem;
-  padding: 1.5rem;
-  border-radius: 1rem;
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  @include square-widget;
+  @include glass-effect;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+
+  // Create an accent border glow effect
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: $white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
 
   &__header {
-    color: #f1f5f9;
     font-size: 1.25rem;
     font-weight: 600;
-    margin-bottom: 1rem;
+    color: $white;
+    margin-bottom: $spacing-md;
+    position: relative;
+
+    // Optional: Add subtle accent line under header
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: $white;
+      opacity: 0.7;
+    }
+  }
+
+  // Create hover state
+  &:hover {
+    transform: translateY(-2px);
+    background-color: $widget-hover;
   }
 }

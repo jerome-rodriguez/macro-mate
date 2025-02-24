@@ -10,36 +10,42 @@ import ViewLogsWidget from "../../components/ViewLogsWidget/ViewLogsWidget";
 import UploadWidget from "../../components/UploadWidget/UploadWidget";
 
 function HomePage() {
+  const date = new Date().toLocaleDateString("en-CA");
   return (
-    <div className="home-container">
-      <div className="date-widget">
-        <DateWidget />
-      </div>
-
-      <div className="user-widget">
+    <section className="home-page">
+      <div className="home-page__user-widget">
         <UserWidget />
       </div>
 
-      <Link to="/view-logs/today" className="todays-widget">
-        <TodaysWidget />
-      </Link>
+      <article className="home-page__group1">
+        <div className="home-page__date-widget">
+          <DateWidget />
+        </div>
 
-      <Link to="/add-food" className="add-food-widget">
-        <AddFoodWidget />
-      </Link>
+        <Link to="/view-logs" className="home-page__view-logs-widget">
+          <ViewLogsWidget />
+        </Link>
+      </article>
 
-      <Link to="/view-logs" className="view-logs-widget">
-        <ViewLogsWidget />
-      </Link>
+      <article className="home-page__group2">
+        <Link to={`/view-logs/${date}`} className="home-page__todays-widget">
+          <TodaysWidget />
+        </Link>
+        <div className="home-page__group2-bottom">
+          <Link to="/add-food" className="home-page__add-food-widget">
+            <AddFoodWidget />
+          </Link>
 
-      <Link to="/goals" className="goal-widget">
+          <Link to="/upload" className="home-page__upload-widget">
+            <UploadWidget />
+          </Link>
+        </div>
+      </article>
+
+      <Link to="/goals" className="home-page__goal-widget">
         <GoalWidget />
       </Link>
-
-      <Link to="/upload" className="upload-widget">
-        <UploadWidget />
-      </Link>
-    </div>
+    </section>
   );
 }
 

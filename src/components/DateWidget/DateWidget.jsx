@@ -15,7 +15,7 @@ export default function DateWidget() {
 
   return (
     <article className="date">
-      <h2 className="date__header">{currentDate}</h2>
+      <h2 className="date__header">{currentDate} </h2>
       <h2 className="date__header">{currentTime}</h2>
     </article>
   );

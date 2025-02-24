@@ -1,0 +1,66 @@
+@use "../../styles/partials/variables.scss" as *;
+@use "../../styles/partials/mixins.scss" as *;
+
+.goals-page {
+  padding: $spacing-xl;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: $white;
+
+  &__charts {
+    display: flex;
+    justify-content: space-around;
+    gap: $spacing-xl;
+    flex-wrap: wrap;
+  }
+
+  &__chart {
+    background-color: $light-navy;
+    @include glass-effect;
+    border-radius: $border-radius-lg;
+    padding: $spacing-lg;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &--pie,
+    &--bar {
+      width: 400px;
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  &__chart-title {
+    text-align: center;
+    margin-bottom: $spacing-md;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  &__subheader {
+    margin-top: $spacing-md;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__loading,
+  &__error {
+    text-align: center;
+    padding: $spacing-xl;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .goals-page {
+    padding: $spacing-lg;
+
+    &__charts {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__chart {
+      width: 100%;
+    }
+  }
+}

@@ -1,5 +1,3 @@
-import "./GoalsPage.scss";
-
 import React, { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
 import { Bar } from "react-chartjs-2";
@@ -13,6 +11,7 @@ import {
   BarElement,
 } from "chart.js";
 import axios from "axios";
+import "./GoalsPage.scss";
 
 // Register required Chart.js components
 ChartJS.register(
@@ -24,7 +23,7 @@ ChartJS.register(
   BarElement
 );
 
-const API_URL = import.meta.env.VITE_API_URL; // Update this with your API
+const API_URL = import.meta.env.VITE_API_URL;
 
 function GoalsPage() {
   const [totals, setTotals] = useState({
@@ -65,8 +64,8 @@ function GoalsPage() {
           totalCalories,
         });
         setLoading(false);
-      } catch (error) {
-        setError(error.message);
+      } catch (err) {
+        setError(err.message);
         setLoading(false);
       }
     };
@@ -86,7 +85,7 @@ function GoalsPage() {
     ],
   };
 
-  // Bar Chart Data for Calories (with bars on top of each other, not stacked)
+  // Bar Chart Data for Calories (not stacked)
   const barData = {
     labels: ["Calories"],
     datasets: [
@@ -103,7 +102,7 @@ function GoalsPage() {
     ],
   };
 
-  // Bar Chart Configuration (not stacked)
+  // Bar Chart Configuration
   const barOptions = {
     responsive: true,
     plugins: {
@@ -119,34 +118,28 @@ function GoalsPage() {
       },
     },
     scales: {
-      x: {
-        // No stacking here, just regular bar chart
-        stacked: false,
-      },
-      y: {
-        stacked: false,
-      },
+      x: { stacked: false },
+      y: { stacked: false },
     },
   };
 
   if (loading) {
-    return <div>Loading data...</div>;
+    return <div className="goals-page__loading">Loading data...</div>;
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div className="goals-page__error">Error: {error}</div>;
   }
 
   return (
-    <div style={{ width: "80%", margin: "0 auto" }}>
-      <h2>Macronutrient Breakdown</h2>
-      <div style={{ display: "flex", justifyContent: "space-around" }}>
-        <div style={{ width: "400px" }}>
+    <div className="goals-page">
+      <div className="goals-page__charts">
+        <div className="goals-page__chart goals-page__chart--pie">
+          <h2 className="goals-page__chart-title">Macronutrient Breakdown</h2>
           <Pie data={pieData} />
         </div>
-
-        <div style={{ width: "400px" }}>
-          <h3>Calories Progress</h3>
+        <div className="goals-page__chart goals-page__chart--bar">
+          <h3 className="goals-page__subheader">Calories Progress</h3>
           <Bar data={barData} options={barOptions} />
         </div>
       </div>

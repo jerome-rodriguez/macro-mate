@@ -37,11 +37,7 @@ export default function FoodLog() {
   const handleDeleteByDate = async (date) => {
     try {
       await axios.delete(`${API_URL}/api/meal-logs/date/${date}`);
-
-      // Show success message
       alert("Delete Successful");
-
-      // Auto-refresh the page
       window.location.reload();
     } catch (err) {
       console.error("Error deleting logs by date:", err);
@@ -49,37 +45,46 @@ export default function FoodLog() {
   };
 
   return (
-    <>
-      <h2>Food Logs</h2>
+    <div className="view-page">
+      <h2 className="view-page__header">Food Logs</h2>
       <div>
         {Object.entries(groupedLogs).map(([date, logs]) => (
-          <div key={date} style={{ marginBottom: "20px" }}>
-            <h3
-              style={{ borderBottom: "2px solid #ccc", paddingBottom: "5px" }}
-            >
-              {date}
-              <Link to={`/view-logs/${date}`}>
-                <button>Edit</button>
-              </Link>
-              <button
-                onClick={() => handleDeleteByDate(date)} // Pass formatted date
-                style={{ marginLeft: "10px" }}
-              >
-                Delete All
-              </button>
-            </h3>
-            <ul>
+          <div key={date} className="view-page__date-group">
+            <div className="view-page__date-header">
+              <h3 className="view-page__date-header-date">
+                {new Date(date).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </h3>
+              <div className="view-page__actions">
+                <Link to={`/view-logs/${date}`}>
+                  <button className="view-page__button">Edit</button>
+                </Link>
+                <button
+                  className="view-page__button view-page__button--delete"
+                  onClick={() => handleDeleteByDate(date)}
+                >
+                  Delete All
+                </button>
+              </div>
+            </div>
+            <ul className="view-page__meal-list">
               {logs.map((item, index) => (
-                <li key={index}>
-                  <strong>{item.meal_type}:</strong> {item.name} - Calories:{" "}
-                  {item.calories} kcal, Protein: {item.protein} g, Fat:{" "}
-                  {item.fat} g, Serving Size: {item.amount} g
+                <li className="view-page__meal-list-item" key={index}>
+                  <strong className="view-page__strong">
+                    {item.meal_type}
+                  </strong>{" "}
+                  {item.name} - Calories: {item.calories} kcal, Protein:{" "}
+                  {item.protein} g, Fat: {item.fat} g, Serving Size:{" "}
+                  {item.amount} g
                 </li>
               ))}
             </ul>
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }

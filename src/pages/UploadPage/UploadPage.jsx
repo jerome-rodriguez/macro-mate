@@ -50,7 +50,6 @@ export default function UploadPage() {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
-
       setResult(response.data);
     } catch (error) {
       setError("Failed to upload image. Please try again.");
@@ -60,61 +59,73 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="upload-container">
-      <h2>Upload Your Food Photo</h2>
+    <div className="upload-page">
+      <h2 className="upload-page__header">Upload Your Food Photo</h2>
 
-      {/* File Input */}
-      <label className="file-upload">
-        <input type="file" accept="image/*" onChange={handleFileChange} />
-        <span>Select Image</span>
-      </label>
+      <div className="upload-page__container">
+        <label className="upload-page__upload-zone">
+          <input type="file" accept="image/*" onChange={handleFileChange} />
+          <span>Click to upload an image</span>
+        </label>
 
-      {/* Image Preview */}
-      {previewUrl && <img className="preview" src={previewUrl} alt="Preview" />}
+        {previewUrl && (
+          <img
+            className="upload-page__preview"
+            src={previewUrl}
+            alt="Preview"
+          />
+        )}
 
-      {/* Meal Type Dropdown */}
-      <select
-        className="meal-select"
-        value={mealType}
-        onChange={handleMealChange}
-      >
-        <option value="breakfast">Breakfast</option>
-        <option value="lunch">Lunch</option>
-        <option value="dinner">Dinner</option>
-      </select>
+        <select
+          className="upload-page__select"
+          value={mealType}
+          onChange={handleMealChange}
+        >
+          <option value="breakfast">Breakfast</option>
+          <option value="lunch">Lunch</option>
+          <option value="dinner">Dinner</option>
+        </select>
 
-      {/* Submit Button */}
-      <button className="upload-btn" onClick={handleSubmit} disabled={loading}>
-        {loading ? "Uploading..." : "Upload"}
-      </button>
+        <button
+          className="upload-page__button"
+          onClick={handleSubmit}
+          disabled={loading}
+        >
+          {loading ? "Analyzing..." : "Upload Photo"}
+        </button>
 
-      {/* Error Message */}
-      {error && <p className="error">{error}</p>}
+        {error && <p className="upload-page__error">{error}</p>}
 
-      {/* Display Results */}
-      {result && (
-        <div className="result">
-          <h3>Results:</h3>
-          <p>
-            <strong>Detected Food:</strong> {result.label}
-          </p>
-          <p>
-            <strong>Meal Type:</strong> {result.mealType}
-          </p>
-          <p>
-            <strong>Calories:</strong> {result.macros.calories} kcal
-          </p>
-          <p>
-            <strong>Protein:</strong> {result.macros.protein} g
-          </p>
-          <p>
-            <strong>Carbs:</strong> {result.macros.carbs} g
-          </p>
-          <p>
-            <strong>Fat:</strong> {result.macros.fat} g
-          </p>
-        </div>
-      )}
+        {result && (
+          <div className="upload-page__result">
+            <h3 className="upload-page__analysis">Analysis Results</h3>
+            <p className="upload-page__p">
+              <strong className="upload-page__strong">Detected Food:</strong>{" "}
+              {result.label}
+            </p>
+            <p className="upload-page__p">
+              <strong className="upload-page__strong">Meal Type:</strong>{" "}
+              {result.mealType}
+            </p>
+            <p className="upload-page__p">
+              <strong className="upload-page__strong">Calories:</strong>{" "}
+              {result.macros.calories} kcal
+            </p>
+            <p className="upload-page__p">
+              <strong className="upload-page__strong">Protein:</strong>{" "}
+              {result.macros.protein} g
+            </p>
+            <p className="upload-page__p">
+              <strong className="upload-page__strong">Carbs:</strong>{" "}
+              {result.macros.carbs} g
+            </p>
+            <p className="upload-page__p">
+              <strong className="upload-page__strong">Fat:</strong>{" "}
+              {result.macros.fat} g
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

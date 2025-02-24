@@ -8,7 +8,6 @@ import SingleLogPage from "./pages/SingleLogPage/SingleLogPage";
 import EditFoodPage from "./pages/EditFoodPage/EditFoodPage";
 import GoalsPage from "./pages/GoalsPage/GoalsPage";
 import UploadPage from "./pages/UploadPage/UploadPage";
-import TodaysPage from "./pages/TodaysPage/TodaysPage";
 
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -23,7 +22,7 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/add-food" element={<AddFoodPage />} />
           <Route path="/view-logs" element={<ViewPage />} />
-          <Route path="/view-logs/today" element={<TodaysPage />} />
+
           <Route path="/view-logs/:date" element={<SingleLogPage />} />
           <Route path="/view-logs/:date/:id" element={<EditFoodPage />} />
           <Route path="/goals" element={<GoalsPage />} />

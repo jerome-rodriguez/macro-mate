@@ -1,0 +1,44 @@
+// @use "./fonts" as *;
+@use "./variables" as *;
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin glass-effect {
+  background: rgba($light-navy, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+@mixin square-widget {
+  width: 240px;
+  height: 240px;
+  padding: $spacing-lg;
+  border-radius: $border-radius-lg;
+  background-color: $light-navy;
+  border: 1px solid $navy-border;
+  color: $white;
+  box-shadow: 0 4px 20px $overlay;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    background-color: $widget-hover;
+    border-color: $white;
+    box-shadow: 0 8px 30px $overlay;
+  }
+}
+
+@mixin rectangular-widget {
+  @include square-widget;
+  width: 496px;
+}
+
+// @mixin responsive($breakpoint) {
+//   @media screen and (min-width: map-get($breakpoints, $breakpoint)) {
+//     @content;
+//   }
+// }
