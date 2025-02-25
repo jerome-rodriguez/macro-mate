@@ -10,7 +10,7 @@ export default function DateWidget() {
   const currentTime = new Date().toLocaleTimeString("en-US", {
     hour: "numeric",
     minute: "2-digit",
-    hour12: true, // Optional: Set to `false` for 24-hour format
+    hour12: true,
   });
 
   return (

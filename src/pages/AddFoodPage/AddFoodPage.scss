@@ -128,7 +128,6 @@
   }
 }
 
-// Instead of using global classes, we now namespace these grid and form-group elements
 .add-food-page__form-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -144,27 +143,4 @@
 .add-food-page__form-label {
   color: $blue-gray;
   font-size: 0.9rem;
-}
-
-@media (max-width: 768px) {
-  .add-food-page {
-    padding: $spacing-lg;
-  }
-
-  .add-food-page__search,
-  .add-food-page__form {
-    padding: $spacing-lg;
-  }
-
-  .add-food-page__form-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .add-food-page__button-container {
-    flex-direction: column;
-
-    .add-food-page__button {
-      width: 100%;
-    }
-  }
 }

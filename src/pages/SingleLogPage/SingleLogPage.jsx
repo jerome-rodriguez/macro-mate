@@ -38,7 +38,7 @@ function SingleLogPage() {
   };
 
   return (
-    <div className="single-log">
+    <section className="single-log">
       <h2 className="single-log__header">Food Logs</h2>
       <ul className="single-log__list">
         {mealLogs.map((item, index) => (
@@ -46,9 +46,9 @@ function SingleLogPage() {
             <div className="single-log__content">
               <div className="single-log__content-type">{item.meal_type}</div>
               <div className="single-log__content-details">
-                <strong>{item.name}</strong> - Calories: {item.calories} kcal,
-                Protein: {item.protein}g, Fat: {item.fat}g, Serving Size:{" "}
-                {item.amount}g
+                <strong className="strong">{item.name}</strong> - Calories:{" "}
+                {item.calories} kcal, Protein: {item.protein}g, Fat: {item.fat}
+                g, Serving Size: {item.amount}g
               </div>
             </div>
             <div className="single-log__actions">
@@ -68,7 +68,7 @@ function SingleLogPage() {
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 }
 

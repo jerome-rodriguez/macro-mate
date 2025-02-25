@@ -41,22 +41,18 @@
 
   &__content {
     flex-grow: 1;
+  }
 
-    &-type {
-      color: $white;
-      font-weight: 700;
-      text-transform: capitalize;
-      margin-bottom: $spacing-xs;
-    }
+  &__content-type {
+    color: $white;
+    font-weight: 700;
+    text-transform: capitalize;
+    margin-bottom: $spacing-xs;
+  }
 
-    &-details {
-      color: $blue-gray;
-      font-size: 0.95rem;
-
-      strong {
-        color: $white;
-      }
-    }
+  &__content-details {
+    color: $blue-gray;
+    font-size: 0.95rem;
   }
 
   &__actions {
@@ -95,4 +91,8 @@
       }
     }
   }
+}
+
+.strong {
+  color: $white;
 }

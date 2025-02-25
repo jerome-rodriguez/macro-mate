@@ -132,18 +132,18 @@ function GoalsPage() {
   }
 
   return (
-    <div className="goals-page">
+    <section className="goals-page">
       <div className="goals-page__charts">
-        <div className="goals-page__chart goals-page__chart--pie">
+        <article className="goals-page__chart goals-page__chart--pie">
           <h2 className="goals-page__chart-title">Macronutrient Breakdown</h2>
           <Pie data={pieData} />
-        </div>
-        <div className="goals-page__chart goals-page__chart--bar">
+        </article>
+        <article className="goals-page__chart goals-page__chart--bar">
           <h3 className="goals-page__subheader">Calories Progress</h3>
           <Bar data={barData} options={barOptions} />
-        </div>
+        </article>
       </div>
-    </div>
+    </section>
   );
 }
 

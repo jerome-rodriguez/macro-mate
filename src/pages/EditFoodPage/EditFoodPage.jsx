@@ -94,7 +94,6 @@ export default function EditFoodPage() {
 
     if (confirm("Are you sure you want to save the changes?")) {
       try {
-        console.log("Sending payload:", payload); // Debugging log
         const response = await axios.put(
           `${API_URL}/api/meal-logs/${mealLog.id}`,
           payload
@@ -113,17 +112,19 @@ export default function EditFoodPage() {
   };
 
   if (!mealLog || !mealLog.meal_type) {
-    return <p className="editFoodPage__loading">Loading meal log details...</p>;
+    return (
+      <p className="edit-food-page__loading">Loading meal log details...</p>
+    );
   }
 
   return (
-    <section className="editFoodPage">
-      <h1 className="editFoodPage__title">Edit Meal Log</h1>
-      <form className="editFoodPage__form" onSubmit={handleSubmitEditFood}>
-        <label className="editFoodPage__label">
+    <section className="edit-food-page">
+      <h1 className="edit-food-page__title">Edit Meal Log</h1>
+      <form className="edit-food-page__form" onSubmit={handleSubmitEditFood}>
+        <label className="edit-food-page__label">
           Meal Type
           <select
-            className="editFoodPage__select"
+            className="edit-food-page__select"
             name="meal_type"
             value={mealLog.meal_type}
             onChange={handleInputChange}
@@ -134,10 +135,10 @@ export default function EditFoodPage() {
           </select>
         </label>
 
-        <label className="editFoodPage__label">
+        <label className="edit-food-page__label">
           Amount
           <input
-            className="editFoodPage__input"
+            className="edit-food-page__input"
             type="text"
             name="amount"
             value={mealLog.amount}
@@ -146,10 +147,10 @@ export default function EditFoodPage() {
           />
         </label>
 
-        <label className="editFoodPage__label">
+        <label className="edit-food-page__label">
           Calories
           <input
-            className="editFoodPage__input"
+            className="edit-food-page__input"
             type="text"
             name="calories"
             value={mealLog.calories}
@@ -158,10 +159,10 @@ export default function EditFoodPage() {
           />
         </label>
 
-        <label className="editFoodPage__label">
+        <label className="edit-food-page__label">
           Protein
           <input
-            className="editFoodPage__input"
+            className="edit-food-page__input"
             type="text"
             name="protein"
             value={mealLog.protein}
@@ -170,10 +171,10 @@ export default function EditFoodPage() {
           />
         </label>
 
-        <label className="editFoodPage__label">
+        <label className="edit-food-page__label">
           Carbs
           <input
-            className="editFoodPage__input"
+            className="edit-food-page__input"
             type="text"
             name="carbs"
             value={mealLog.carbs}
@@ -182,10 +183,10 @@ export default function EditFoodPage() {
           />
         </label>
 
-        <label className="editFoodPage__label">
+        <label className="edit-food-page__label">
           Fat
           <input
-            className="editFoodPage__input"
+            className="edit-food-page__input"
             type="text"
             name="fat"
             value={mealLog.fat}
@@ -194,12 +195,12 @@ export default function EditFoodPage() {
           />
         </label>
 
-        <div className="editFoodPage__button-container">
-          <button className="editFoodPage__button" type="submit">
+        <div className="edit-food-page__button-container">
+          <button className="edit-food-page__button" type="submit">
             Save
           </button>
           <button
-            className="editFoodPage__button editFoodPage__button--secondary"
+            className="edit-food-page__button editFoodPage__button--secondary"
             type="button"
             onClick={() => navigate(-1)}
           >

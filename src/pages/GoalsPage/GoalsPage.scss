@@ -49,18 +49,3 @@
     font-size: 1.2rem;
   }
 }
-
-@media (max-width: 768px) {
-  .goals-page {
-    padding: $spacing-lg;
-
-    &__charts {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    &__chart {
-      width: 100%;
-    }
-  }
-}

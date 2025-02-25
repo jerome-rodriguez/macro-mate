@@ -59,7 +59,7 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="upload-page">
+    <section className="upload-page">
       <h2 className="upload-page__header">Upload Your Food Photo</h2>
 
       <div className="upload-page__container">
@@ -126,6 +126,6 @@ export default function UploadPage() {
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 }

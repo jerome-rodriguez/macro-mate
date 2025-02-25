@@ -1,4 +1,3 @@
-// @use "./fonts" as *;
 @use "./variables" as *;
 
 @mixin flex-center {
@@ -36,9 +35,3 @@
   @include square-widget;
   width: 496px;
 }
-
-// @mixin responsive($breakpoint) {
-//   @media screen and (min-width: map-get($breakpoints, $breakpoint)) {
-//     @content;
-//   }
-// }

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const API_URL = import.meta.env.VITE_API_URL; // Use backend API URL
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function FoodLog() {
   const [mealLogs, setMealLogs] = useState([]);
@@ -45,7 +45,7 @@ export default function FoodLog() {
   };
 
   return (
-    <div className="view-page">
+    <section className="view-page">
       <h2 className="view-page__header">Food Logs</h2>
       <div>
         {Object.entries(groupedLogs).map(([date, logs]) => (
@@ -85,6 +85,6 @@ export default function FoodLog() {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

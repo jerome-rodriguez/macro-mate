@@ -1,18 +1,18 @@
 @use "../../styles/partials/variables.scss" as *;
 @use "../../styles/partials/mixins.scss" as *;
 
-.editFoodPage {
+.edit-food-page {
   padding: $spacing-xl;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.editFoodPage__title {
+.edit-food-page__title {
   color: $white;
   margin-bottom: $spacing-lg;
 }
 
-.editFoodPage__form {
+.edit-food-page__form {
   @include glass-effect;
   background-color: $light-navy;
   padding: $spacing-xl;
@@ -22,7 +22,7 @@
   gap: $spacing-lg;
 }
 
-.editFoodPage__label {
+.edit-food-page__label {
   display: flex;
   flex-direction: column;
   gap: $spacing-sm;
@@ -30,8 +30,8 @@
   font-size: 0.9rem;
 }
 
-.editFoodPage__input,
-.editFoodPage__select {
+.edit-food-page__input,
+.edit-food-page__select {
   background-color: $dark-navy;
   border: 1px solid $navy-border;
   color: $white;
@@ -52,7 +52,7 @@
   }
 }
 
-.editFoodPage__button-container {
+.edit-food-page__button-container {
   grid-column: 1 / -1;
   display: flex;
   gap: $spacing-md;
@@ -60,7 +60,7 @@
   margin-top: $spacing-lg;
 }
 
-.editFoodPage__button {
+.edit-food-page__button {
   background-color: $white;
   color: $dark-navy;
   padding: $spacing-md $spacing-lg;
@@ -75,7 +75,7 @@
   }
 }
 
-.editFoodPage__button--secondary {
+.edit-food-page__button--secondary {
   background-color: transparent;
   color: $white;
   border: 1px solid $navy-border;
@@ -85,13 +85,13 @@
   }
 }
 
-.editFoodPage__error-message {
+.edit-food-page__error-message {
   color: #ff6464;
   font-size: 0.85rem;
   margin-top: $spacing-sm;
 }
 
-.editFoodPage__loading {
+.edit-food-page__loading {
   color: $white;
   text-align: center;
   padding: $spacing-xl;

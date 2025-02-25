@@ -22,7 +22,6 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/add-food" element={<AddFoodPage />} />
           <Route path="/view-logs" element={<ViewPage />} />
-
           <Route path="/view-logs/:date" element={<SingleLogPage />} />
           <Route path="/view-logs/:date/:id" element={<EditFoodPage />} />
           <Route path="/goals" element={<GoalsPage />} />

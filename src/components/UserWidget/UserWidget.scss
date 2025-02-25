@@ -10,7 +10,6 @@
   overflow: hidden;
   height: 496px;
 
-  // Create an accent border glow effect
   &::before {
     content: "";
     position: absolute;
@@ -34,7 +33,6 @@
     margin-bottom: $spacing-md;
     position: relative;
 
-    // Optional: Add subtle accent line under header
     &::after {
       content: "";
       position: absolute;
@@ -47,7 +45,6 @@
     }
   }
 
-  // Create hover state
   &:hover {
     transform: translateY(-2px);
     background-color: $widget-hover;
