@@ -90,10 +90,9 @@ function GoalsPage() {
   // Pie Chart Data for Macronutrients
   const pieData = {
     labels: ["Protein", "Carbs", "Fat"],
-
     datasets: [
       {
-        data: [totals.protein, totals.carbs, totals.fat],
+        data: [totals.protein || 1, totals.carbs || 1, totals.fat || 1], // Prevent passing undefined values
         backgroundColor: ["#36A2EB", "#FFCE56", "#FF6384"],
         hoverBackgroundColor: ["#4BC0C0", "#FF9F40", "#FF6384"],
       },
