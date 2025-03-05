@@ -117,6 +117,68 @@ function GoalsPage() {
     },
   };
 
+  // Bar Chart Data for Calories (not stacked)
+  const barData = {
+    labels: ["Calories"],
+    datasets: [
+      {
+        label: "Calories Consumed",
+        data: [totals.totalCalories],
+        backgroundColor: "#66b3ff",
+      },
+      {
+        label: "Goal Calories",
+        data: [goalCalories],
+        backgroundColor: "#ffcc00",
+      },
+    ],
+  };
+
+  // Bar Chart Configuration
+  const barOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+        labels: {
+          color: "white", // ✅ Correct way to set legend text color
+        },
+      },
+      tooltip: {
+        displayColors: true, // Keep the colored square
+        padding: 10, // Adds space around tooltip
+        boxPadding: 4, // Adds space between the color box and text
+        callbacks: {
+          label: function (tooltipItem) {
+            return `${tooltipItem.dataset.label}: ${tooltipItem.raw} kcal`;
+          },
+        },
+        titleAlign: "center", // Center align the title text
+        bodyAlign: "center", // Center align the tooltip body text
+      },
+    },
+    scales: {
+      x: {
+        stacked: false,
+        ticks: {
+          color: "white", // White X-axis labels
+        },
+        grid: {
+          color: "rgba(255, 255, 255, 0.2)", // Light white grid lines
+        },
+      },
+      y: {
+        stacked: false,
+        ticks: {
+          color: "white", // White Y-axis labels
+        },
+        grid: {
+          color: "rgba(255, 255, 255, 0.2)", // Light white grid lines
+        },
+      },
+    },
+  };
+
   if (loading) {
     return <div className="goals-page__loading">Loading data...</div>;
   }
@@ -131,6 +193,10 @@ function GoalsPage() {
         <article className="goals-page__chart goals-page__chart--pie">
           <h2 className="goals-page__chart-title">Macronutrient Breakdown</h2>
           <Pie data={pieData} options={pieOptions} />
+        </article>
+        <article className="goals-page__chart goals-page__chart--bar">
+          <h3 className="goals-page__subheader">Calories Progress</h3>
+          <Bar data={barData} options={barOptions} />
         </article>
       </div>
     </section>
