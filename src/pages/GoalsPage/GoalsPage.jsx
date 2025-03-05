@@ -57,10 +57,10 @@ function GoalsPage() {
           totalCalories = 0;
 
         data.forEach(({ protein, carbs, fat, calories }) => {
-          totalProtein += Number(protein) || 0; // Convert string to number
-          totalCarbs += Number(carbs) || 0;
-          totalFat += Number(fat) || 0;
-          totalCalories += Number(calories) || 0;
+          totalProtein += parseFloat(protein) || 0; // ✅ Convert string to number
+          totalCarbs += parseFloat(carbs) || 0; // ✅ Convert string to number
+          totalFat += parseFloat(fat) || 0; // ✅ Convert string to number
+          totalCalories += Number(calories) || 0; // ✅ Convert to number safely
         });
 
         console.log("📈 Corrected Totals Calculated:", {
@@ -92,7 +92,7 @@ function GoalsPage() {
     labels: ["Protein", "Carbs", "Fat"],
     datasets: [
       {
-        data: [totals.protein || 1, totals.carbs || 1, totals.fat || 1], // Prevent passing undefined values
+        data: [totals.protein, totals.carbs, totals.fat],
         backgroundColor: ["#36A2EB", "#FFCE56", "#FF6384"],
         hoverBackgroundColor: ["#4BC0C0", "#FF9F40", "#FF6384"],
       },
@@ -117,68 +117,6 @@ function GoalsPage() {
     },
   };
 
-  // Bar Chart Data for Calories (not stacked)
-  const barData = {
-    labels: ["Calories"],
-    datasets: [
-      {
-        label: "Calories Consumed",
-        data: [totals.totalCalories],
-        backgroundColor: "#66b3ff",
-      },
-      {
-        label: "Goal Calories",
-        data: [goalCalories],
-        backgroundColor: "#ffcc00",
-      },
-    ],
-  };
-
-  // Bar Chart Configuration
-  const barOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-        labels: {
-          color: "white", // ✅ Correct way to set legend text color
-        },
-      },
-      tooltip: {
-        displayColors: true, // Keep the colored square
-        padding: 10, // Adds space around tooltip
-        boxPadding: 4, // Adds space between the color box and text
-        callbacks: {
-          label: function (tooltipItem) {
-            return `${tooltipItem.dataset.label}: ${tooltipItem.raw} kcal`;
-          },
-        },
-        titleAlign: "center", // Center align the title text
-        bodyAlign: "center", // Center align the tooltip body text
-      },
-    },
-    scales: {
-      x: {
-        stacked: false,
-        ticks: {
-          color: "white", // White X-axis labels
-        },
-        grid: {
-          color: "rgba(255, 255, 255, 0.2)", // Light white grid lines
-        },
-      },
-      y: {
-        stacked: false,
-        ticks: {
-          color: "white", // White Y-axis labels
-        },
-        grid: {
-          color: "rgba(255, 255, 255, 0.2)", // Light white grid lines
-        },
-      },
-    },
-  };
-
   if (loading) {
     return <div className="goals-page__loading">Loading data...</div>;
   }
@@ -193,10 +131,6 @@ function GoalsPage() {
         <article className="goals-page__chart goals-page__chart--pie">
           <h2 className="goals-page__chart-title">Macronutrient Breakdown</h2>
           <Pie data={pieData} options={pieOptions} />
-        </article>
-        <article className="goals-page__chart goals-page__chart--bar">
-          <h3 className="goals-page__subheader">Calories Progress</h3>
-          <Bar data={barData} options={barOptions} />
         </article>
       </div>
     </section>
