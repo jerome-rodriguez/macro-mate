@@ -41,9 +41,15 @@ function GoalsPage() {
     const fetchMealLogs = async () => {
       try {
         const date = new Date().toLocaleDateString("en-CA");
+        console.log(
+          "📡 Fetching data from:",
+          `${API_URL}/api/meal-logs/date/${date}`
+        );
+
         const { data } = await axios.get(
           `${API_URL}/api/meal-logs/date/${date}`
         );
+        console.log("📊 Fetched Data:", data);
 
         let totalProtein = 0,
           totalCarbs = 0,
@@ -51,10 +57,17 @@ function GoalsPage() {
           totalCalories = 0;
 
         data.forEach(({ protein, carbs, fat, calories }) => {
-          totalProtein += protein;
-          totalCarbs += carbs;
-          totalFat += fat;
-          totalCalories += calories;
+          totalProtein += protein || 0;
+          totalCarbs += carbs || 0;
+          totalFat += fat || 0;
+          totalCalories += calories || 0;
+        });
+
+        console.log("📈 Totals Calculated:", {
+          protein: totalProtein,
+          carbs: totalCarbs,
+          fat: totalFat,
+          totalCalories,
         });
 
         setTotals({
@@ -65,6 +78,7 @@ function GoalsPage() {
         });
         setLoading(false);
       } catch (err) {
+        console.error("❌ API Fetch Error:", err.message);
         setError(err.message);
         setLoading(false);
       }
