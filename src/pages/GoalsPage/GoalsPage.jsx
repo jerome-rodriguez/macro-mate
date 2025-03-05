@@ -57,13 +57,13 @@ function GoalsPage() {
           totalCalories = 0;
 
         data.forEach(({ protein, carbs, fat, calories }) => {
-          totalProtein += protein || 0;
-          totalCarbs += carbs || 0;
-          totalFat += fat || 0;
-          totalCalories += calories || 0;
+          totalProtein += Number(protein) || 0; // Convert string to number
+          totalCarbs += Number(carbs) || 0;
+          totalFat += Number(fat) || 0;
+          totalCalories += Number(calories) || 0;
         });
 
-        console.log("📈 Totals Calculated:", {
+        console.log("📈 Corrected Totals Calculated:", {
           protein: totalProtein,
           carbs: totalCarbs,
           fat: totalFat,
