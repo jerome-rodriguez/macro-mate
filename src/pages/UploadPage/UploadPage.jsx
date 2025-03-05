@@ -106,9 +106,12 @@ export default function UploadPage() {
               {result.label}
             </p>
             <p className="upload-page__p">
-              <strong className="upload-page__strong">Meal Type:</strong>{" "}
-              {result.mealType}
+              <strong className="upload-page__strong">Meal Type:</strong>
+              {Array.isArray(result.mealType)
+                ? result.mealType.join(", ")
+                : result.mealType}
             </p>
+
             <p className="upload-page__p">
               <strong className="upload-page__strong">Calories:</strong>{" "}
               {result.macros.calories} kcal
