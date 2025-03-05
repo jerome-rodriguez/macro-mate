@@ -1,0 +1,51 @@
+@use "../../styles/partials/mixins.scss" as *;
+@use "../../styles/partials/variables.scss" as *;
+
+.contact {
+  @include square-widget;
+  @include glass-effect;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: $white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+
+  &__header {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: $white;
+    margin-bottom: $spacing-md;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: $white;
+      opacity: 0.7;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    background-color: $widget-hover;
+  }
+}

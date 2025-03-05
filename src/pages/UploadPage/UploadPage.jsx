@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import "./UploadPage.scss";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function UploadPage() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -44,7 +46,7 @@ export default function UploadPage() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/vision/upload",
+        `${API_URL}/api/vision/upload`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

@@ -8,6 +8,7 @@ import TodaysWidget from "../../components/TodaysWidget/TodaysWidget";
 import UserWidget from "../../components/UserWidget/UserWidget";
 import ViewLogsWidget from "../../components/ViewLogsWidget/ViewLogsWidget";
 import UploadWidget from "../../components/UploadWidget/UploadWidget";
+import ContactWidget from "../../components/ContactWidget/ContactWidget";
 
 function HomePage() {
   const date = new Date().toLocaleDateString("en-CA");
@@ -42,9 +43,15 @@ function HomePage() {
         </div>
       </article>
 
-      <Link to="/goals" className="home-page__goal-widget">
-        <GoalWidget />
-      </Link>
+      <article className="home-page__group3">
+        <Link to="/goals" className="home-page__goal-widget">
+          <GoalWidget />
+        </Link>
+
+        <Link to="contact">
+          <ContactWidget />
+        </Link>
+      </article>
     </section>
   );
 }

@@ -11,6 +11,7 @@ import UploadPage from "./pages/UploadPage/UploadPage";
 
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import ContactPage from "./pages/ContactPage/ContactPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/view-logs/:date/:id" element={<EditFoodPage />} />
           <Route path="/goals" element={<GoalsPage />} />
           <Route path="/upload" element={<UploadPage />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </main>
       <Footer />

@@ -76,6 +76,7 @@ function GoalsPage() {
   // Pie Chart Data for Macronutrients
   const pieData = {
     labels: ["Protein", "Carbs", "Fat"],
+
     datasets: [
       {
         data: [totals.protein, totals.carbs, totals.fat],
@@ -83,6 +84,24 @@ function GoalsPage() {
         hoverBackgroundColor: ["#4BC0C0", "#FF9F40", "#FF6384"],
       },
     ],
+  };
+
+  // Pie Chart Configuration
+  const pieOptions = {
+    plugins: {
+      legend: {
+        labels: {
+          color: "white", // White legend text
+        },
+      },
+      tooltip: {
+        displayColors: true, // Keep the colored square
+        padding: 10, // Adds space around tooltip
+        boxPadding: 4, // Space between color box and text
+        titleAlign: "center", // Center align the title text
+        bodyAlign: "center", // Center align the tooltip body text
+      },
+    },
   };
 
   // Bar Chart Data for Calories (not stacked)
@@ -108,18 +127,42 @@ function GoalsPage() {
     plugins: {
       legend: {
         position: "top",
+        labels: {
+          color: "white", // ✅ Correct way to set legend text color
+        },
       },
       tooltip: {
+        displayColors: true, // Keep the colored square
+        padding: 10, // Adds space around tooltip
+        boxPadding: 4, // Adds space between the color box and text
         callbacks: {
           label: function (tooltipItem) {
-            return tooltipItem.dataset.label + ": " + tooltipItem.raw + " kcal";
+            return `${tooltipItem.dataset.label}: ${tooltipItem.raw} kcal`;
           },
         },
+        titleAlign: "center", // Center align the title text
+        bodyAlign: "center", // Center align the tooltip body text
       },
     },
     scales: {
-      x: { stacked: false },
-      y: { stacked: false },
+      x: {
+        stacked: false,
+        ticks: {
+          color: "white", // White X-axis labels
+        },
+        grid: {
+          color: "rgba(255, 255, 255, 0.2)", // Light white grid lines
+        },
+      },
+      y: {
+        stacked: false,
+        ticks: {
+          color: "white", // White Y-axis labels
+        },
+        grid: {
+          color: "rgba(255, 255, 255, 0.2)", // Light white grid lines
+        },
+      },
     },
   };
 
@@ -136,7 +179,7 @@ function GoalsPage() {
       <div className="goals-page__charts">
         <article className="goals-page__chart goals-page__chart--pie">
           <h2 className="goals-page__chart-title">Macronutrient Breakdown</h2>
-          <Pie data={pieData} />
+          <Pie data={pieData} options={pieOptions} />
         </article>
         <article className="goals-page__chart goals-page__chart--bar">
           <h3 className="goals-page__subheader">Calories Progress</h3>
