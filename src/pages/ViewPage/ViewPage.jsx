@@ -7,39 +7,43 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export default function FoodLog() {
   const [mealLogs, setMealLogs] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchMealLogs = async () => {
       try {
+        setIsLoading(true);
         const { data } = await axios.get(`${API_URL}/api/meal-logs`);
+
+        // Ensure each log has a standardized date format
+        const processedLogs = data.map((log) => {
+          // Extract just the date part (YYYY-MM-DD) if it has a time component
+          const dateOnly = log.date.split("T")[0];
+          return { ...log, dateOnly };
+        });
+
         // Sort logs by date (newest first)
-        const sortedLogs = data.sort(
-          (a, b) => new Date(b.date) - new Date(a.date)
+        const sortedLogs = processedLogs.sort(
+          (a, b) => new Date(b.dateOnly) - new Date(a.dateOnly)
         );
+
         setMealLogs(sortedLogs);
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchMealLogs();
   }, []);
 
-  // Group logs by date and adjust for timezone issues
+  // Group logs by date using the extracted date part
   const groupedLogs = mealLogs.reduce((acc, log) => {
-    // Create a Date object
-    const dateObj = new Date(log.date);
-
-    // Format date as YYYY-MM-DD in local timezone
-    const localDate =
-      dateObj.getFullYear() +
-      "-" +
-      String(dateObj.getMonth() + 1).padStart(2, "0") +
-      "-" +
-      String(dateObj.getDate()).padStart(2, "0");
-
-    if (!acc[localDate]) acc[localDate] = [];
-    acc[localDate].push(log);
+    // Use the extracted date part
+    const date = log.dateOnly;
+    if (!acc[date]) acc[date] = [];
+    acc[date].push(log);
     return acc;
   }, {});
 
@@ -54,19 +58,22 @@ export default function FoodLog() {
     }
   };
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <section className="view-page">
       <h2 className="view-page__header">Food Logs</h2>
-      <div>
-        {Object.entries(groupedLogs).map(([date, logs]) => {
-          // Create a date object for display formatting
-          const displayDate = new Date(date);
-
-          return (
+      {Object.keys(groupedLogs).length === 0 ? (
+        <p>No food logs found.</p>
+      ) : (
+        <div>
+          {Object.entries(groupedLogs).map(([date, logs]) => (
             <div key={date} className="view-page__date-group">
               <div className="view-page__date-header">
                 <h3 className="view-page__date-header-date">
-                  {displayDate.toLocaleDateString("en-US", {
+                  {new Date(date + "T00:00:00").toLocaleDateString("en-US", {
                     month: "long",
                     day: "numeric",
                     year: "numeric",
@@ -97,9 +104,9 @@ export default function FoodLog() {
                 ))}
               </ul>
             </div>
-          );
-        })}
-      </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }
