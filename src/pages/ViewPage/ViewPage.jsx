@@ -25,31 +25,21 @@ export default function FoodLog() {
     fetchMealLogs();
   }, []);
 
-  // Safely format date to avoid timezone issues
-  const formatDateString = (dateStr) => {
-    const date = new Date(dateStr);
-    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
-      2,
-      "0"
-    )}-${String(date.getDate()).padStart(2, "0")}`;
-  };
-
-  // Format date for display
-  const formatDisplayDate = (dateStr) => {
-    const date = new Date(dateStr);
-    return date.toLocaleDateString("en-US", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    });
-  };
-
-  // Group logs by date - normalize all dates to ensure consistency
+  // Group logs by date and adjust for timezone issues
   const groupedLogs = mealLogs.reduce((acc, log) => {
-    // Use a consistent date format for grouping
-    const dateKey = formatDateString(log.date);
-    if (!acc[dateKey]) acc[dateKey] = [];
-    acc[dateKey].push(log);
+    // Create a Date object
+    const dateObj = new Date(log.date);
+
+    // Format date as YYYY-MM-DD in local timezone
+    const localDate =
+      dateObj.getFullYear() +
+      "-" +
+      String(dateObj.getMonth() + 1).padStart(2, "0") +
+      "-" +
+      String(dateObj.getDate()).padStart(2, "0");
+
+    if (!acc[localDate]) acc[localDate] = [];
+    acc[localDate].push(log);
     return acc;
   }, {});
 
@@ -68,38 +58,47 @@ export default function FoodLog() {
     <section className="view-page">
       <h2 className="view-page__header">Food Logs</h2>
       <div>
-        {Object.entries(groupedLogs).map(([dateKey, logs]) => (
-          <div key={dateKey} className="view-page__date-group">
-            <div className="view-page__date-header">
-              <h3 className="view-page__date-header-date">
-                {formatDisplayDate(dateKey)}
-              </h3>
-              <div className="view-page__actions">
-                <Link to={`/view-logs/${dateKey}`}>
-                  <button className="view-page__button">Edit</button>
-                </Link>
-                <button
-                  className="view-page__button view-page__button--delete"
-                  onClick={() => handleDeleteByDate(dateKey)}
-                >
-                  Delete All
-                </button>
+        {Object.entries(groupedLogs).map(([date, logs]) => {
+          // Create a date object for display formatting
+          const displayDate = new Date(date);
+
+          return (
+            <div key={date} className="view-page__date-group">
+              <div className="view-page__date-header">
+                <h3 className="view-page__date-header-date">
+                  {displayDate.toLocaleDateString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </h3>
+                <div className="view-page__actions">
+                  <Link to={`/view-logs/${date}`}>
+                    <button className="view-page__button">Edit</button>
+                  </Link>
+                  <button
+                    className="view-page__button view-page__button--delete"
+                    onClick={() => handleDeleteByDate(date)}
+                  >
+                    Delete All
+                  </button>
+                </div>
               </div>
+              <ul className="view-page__meal-list">
+                {logs.map((item, index) => (
+                  <li className="view-page__meal-list-item" key={index}>
+                    <strong className="view-page__strong">
+                      {item.meal_type}
+                    </strong>{" "}
+                    {item.name} - Calories: {item.calories} kcal, Protein:{" "}
+                    {item.protein} g, Fat: {item.fat} g, Serving Size:{" "}
+                    {item.amount} g
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="view-page__meal-list">
-              {logs.map((item, index) => (
-                <li className="view-page__meal-list-item" key={index}>
-                  <strong className="view-page__strong">
-                    {item.meal_type}
-                  </strong>{" "}
-                  {item.name} - Calories: {item.calories} kcal, Protein:{" "}
-                  {item.protein} g, Fat: {item.fat} g, Serving Size:{" "}
-                  {item.amount} g
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
