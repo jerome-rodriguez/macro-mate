@@ -60,7 +60,7 @@ export default function FoodLog() {
                 })}
               </h3>
               <div className="view-page__actions">
-                <Link to={`/view-logs/${logs.date.split("T")[0]}`}>
+                <Link to={`/view-logs/${log.date.split("T")[0]}`}>
                   <button className="view-page__button">Edit</button>
                 </Link>
                 <button
