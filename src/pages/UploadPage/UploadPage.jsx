@@ -27,7 +27,6 @@ export default function UploadPage() {
     setMealType(event.target.value);
   };
 
-  // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -36,15 +35,18 @@ export default function UploadPage() {
       return;
     }
 
+    // Clear any previous results or errors before starting the upload
     setLoading(true);
     setError("");
     setResult(null);
 
+    // Create FormData and append the selected file and meal type
     const formData = new FormData();
-    formData.append("image", selectedFile);
-    formData.append("mealType", mealType);
+    formData.append("image", selectedFile); // Assuming 'selectedFile' contains the image
+    formData.append("mealType", mealType); // Ensure 'mealType' is the correct state variable from your dropdown
 
     try {
+      // Send the form data to the backend
       const response = await axios.post(
         `${API_URL}/api/vision/upload`,
         formData,
@@ -53,14 +55,16 @@ export default function UploadPage() {
         }
       );
 
-      // Add the console log here to inspect the response
+      // Check and log the backend response to see what you're receiving
       console.log("Backend response:", response.data);
 
-      setResult(response.data);
+      // Assuming the backend response contains the relevant data you want to display
+      setResult(response.data); // You can set the result to display the data in the UI
     } catch (error) {
+      console.error("Upload failed:", error); // Log the actual error if needed for debugging
       setError("Failed to upload image. Please try again.");
     } finally {
-      setLoading(false);
+      setLoading(false); // Hide the loading spinner or loading state
     }
   };
 
@@ -87,9 +91,9 @@ export default function UploadPage() {
           value={mealType}
           onChange={handleMealChange}
         >
-          <option value="breakfast">Breakfast</option>
-          <option value="lunch">Lunch</option>
-          <option value="dinner">Dinner</option>
+          <option value="Breakfast">Breakfast</option>
+          <option value="Lunch">Lunch</option>
+          <option value="Dinner">Dinner</option>
         </select>
 
         <button
