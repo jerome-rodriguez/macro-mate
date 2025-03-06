@@ -115,7 +115,7 @@ export default function UploadPage() {
             </p>
             <p className="upload-page__p">
               <strong className="upload-page__strong">Meal Type:</strong>{" "}
-              {result.mealType} {/* Display meal type */}
+              {mealType} {/* Display meal type */}
             </p>
             <p className="upload-page__p">
               <strong className="upload-page__strong">Calories:</strong>{" "}
