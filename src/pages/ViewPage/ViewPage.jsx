@@ -25,12 +25,31 @@ export default function FoodLog() {
     fetchMealLogs();
   }, []);
 
-  // Group logs by date - use the original date string to avoid timezone issues
+  // Safely format date to avoid timezone issues
+  const formatDateString = (dateStr) => {
+    const date = new Date(dateStr);
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
+      2,
+      "0"
+    )}-${String(date.getDate()).padStart(2, "0")}`;
+  };
+
+  // Format date for display
+  const formatDisplayDate = (dateStr) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    });
+  };
+
+  // Group logs by date - normalize all dates to ensure consistency
   const groupedLogs = mealLogs.reduce((acc, log) => {
-    // Get the date part without any timezone conversion
-    const date = log.date.split("T")[0]; // Format date as YYYY-MM-DD
-    if (!acc[date]) acc[date] = [];
-    acc[date].push(log);
+    // Use a consistent date format for grouping
+    const dateKey = formatDateString(log.date);
+    if (!acc[dateKey]) acc[dateKey] = [];
+    acc[dateKey].push(log);
     return acc;
   }, {});
 
@@ -49,23 +68,19 @@ export default function FoodLog() {
     <section className="view-page">
       <h2 className="view-page__header">Food Logs</h2>
       <div>
-        {Object.entries(groupedLogs).map(([date, logs]) => (
-          <div key={date} className="view-page__date-group">
+        {Object.entries(groupedLogs).map(([dateKey, logs]) => (
+          <div key={dateKey} className="view-page__date-group">
             <div className="view-page__date-header">
               <h3 className="view-page__date-header-date">
-                {new Date(date).toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                })}
+                {formatDisplayDate(dateKey)}
               </h3>
               <div className="view-page__actions">
-                <Link to={`/view-logs/${date}`}>
+                <Link to={`/view-logs/${dateKey}`}>
                   <button className="view-page__button">Edit</button>
                 </Link>
                 <button
                   className="view-page__button view-page__button--delete"
-                  onClick={() => handleDeleteByDate(date)}
+                  onClick={() => handleDeleteByDate(dateKey)}
                 >
                   Delete All
                 </button>
