@@ -25,9 +25,10 @@ export default function FoodLog() {
     fetchMealLogs();
   }, []);
 
-  // Group logs by date
+  // Group logs by date - use the original date string to avoid timezone issues
   const groupedLogs = mealLogs.reduce((acc, log) => {
-    const date = new Date(log.date).toISOString().split("T")[0]; // Format date as YYYY-MM-DD
+    // Get the date part without any timezone conversion
+    const date = log.date.split("T")[0]; // Format date as YYYY-MM-DD
     if (!acc[date]) acc[date] = [];
     acc[date].push(log);
     return acc;
