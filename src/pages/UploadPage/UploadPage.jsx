@@ -41,7 +41,9 @@ export default function UploadPage() {
 
     const formData = new FormData();
     formData.append("image", selectedFile);
-    formData.append("mealType", mealType[0]); // Ensure you send the first value as a string
+
+    // Ensure the mealType is sent as a string (in case it's an array)
+    formData.append("mealType", mealType[0] || mealType); // Fix: if mealType is an array, grab the first value
 
     try {
       const response = await axios.post(
@@ -52,9 +54,7 @@ export default function UploadPage() {
         }
       );
 
-      // Add the console log here to inspect the response
       console.log("Backend response:", response.data);
-
       setResult(response.data);
     } catch (error) {
       setError("Failed to upload image. Please try again.");
