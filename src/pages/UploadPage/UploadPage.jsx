@@ -35,17 +35,18 @@ export default function UploadPage() {
       return;
     }
 
+    // Clear any previous results or errors before starting the upload
     setLoading(true);
     setError("");
     setResult(null);
 
+    // Create FormData and append the selected file and meal type
     const formData = new FormData();
-    formData.append("image", selectedFile);
-
-    // Ensure the mealType is sent as a string (in case it's an array)
-    formData.append("mealType", mealType[0] || mealType); // Fix: if mealType is an array, grab the first value
+    formData.append("image", selectedFile); // Assuming 'selectedFile' contains the image
+    formData.append("mealType", mealType); // Ensure 'mealType' is the correct state variable from your dropdown
 
     try {
+      // Send the form data to the backend
       const response = await axios.post(
         `${API_URL}/api/vision/upload`,
         formData,
@@ -54,12 +55,16 @@ export default function UploadPage() {
         }
       );
 
+      // Check and log the backend response to see what you're receiving
       console.log("Backend response:", response.data);
-      setResult(response.data);
+
+      // Assuming the backend response contains the relevant data you want to display
+      setResult(response.data); // You can set the result to display the data in the UI
     } catch (error) {
+      console.error("Upload failed:", error); // Log the actual error if needed for debugging
       setError("Failed to upload image. Please try again.");
     } finally {
-      setLoading(false);
+      setLoading(false); // Hide the loading spinner or loading state
     }
   };
 
