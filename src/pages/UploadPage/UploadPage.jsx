@@ -111,11 +111,7 @@ export default function UploadPage() {
             </p>
             <p className="upload-page__p">
               <strong className="upload-page__strong">Meal Type:</strong>{" "}
-              {typeof result.mealType === "string" &&
-              result.mealType.startsWith("{")
-                ? JSON.parse(result.mealType).Breakfast ||
-                  JSON.parse(result.mealType)
-                : result.mealType}
+              {result.mealType} {/* Display meal type */}
             </p>
             <p className="upload-page__p">
               <strong className="upload-page__strong">Calories:</strong>{" "}
