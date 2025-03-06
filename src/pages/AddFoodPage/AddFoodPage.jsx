@@ -68,11 +68,18 @@ function AddFoodPage() {
     setMessage("");
 
     try {
-      const response = await axios.post(`${API_URL}/api/food-items`, formData, {
-        headers: {
-          "Content-Type": "application/json",
+      const response = await axios.post(
+        `${API_URL}/api/food-items`,
+        {
+          ...formData,
+          mealType: mealType, // Include mealType separately
         },
-      });
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       setMessage(`Food item added successfully: ${response.data.foodName}`);
     } catch (error) {
       if (error.response) {
@@ -241,7 +248,7 @@ function AddFoodPage() {
               className="add-food-page__select"
               id="mealType"
               name="mealType"
-              value={formData.mealType || mealType}
+              value={mealType}
               onChange={handleChange}
               required
             >
