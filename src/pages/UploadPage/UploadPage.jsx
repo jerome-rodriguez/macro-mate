@@ -111,8 +111,9 @@ export default function UploadPage() {
             </p>
             <p className="upload-page__p">
               <strong className="upload-page__strong">Meal Type:</strong>{" "}
-              {result.mealType}
+              {result.mealType[0]} {/* Access the first element of the array */}
             </p>
+
             <p className="upload-page__p">
               <strong className="upload-page__strong">Calories:</strong>{" "}
               {result.macros.calories} kcal
