@@ -52,6 +52,10 @@ export default function UploadPage() {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
+
+      // Add the console log here to inspect the response
+      console.log("Backend response:", response.data);
+
       setResult(response.data);
     } catch (error) {
       setError("Failed to upload image. Please try again.");
